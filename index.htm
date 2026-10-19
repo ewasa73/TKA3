@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+<title>TKA English Reading Trainer</title>
+<style>
+:root{--blue:#2563eb;--dark:#0f172a;--green:#16a34a;--red:#dc2626;--amber:#d97706;--bg:#eef4ff;--line:#dbe3ef;--muted:#64748b}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eef4ff,#f8fafc);color:#1e293b;line-height:1.55}
+button,input{font:inherit} button{cursor:pointer}.hidden{display:none!important}.wrap{width:min(1180px,94%);margin:auto}
+header{background:linear-gradient(135deg,#1d4ed8,#2563eb,#0891b2);color:#fff;padding:18px 0;box-shadow:0 5px 22px #0002}
+.head{display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{display:flex;gap:12px;align-items:center}.logo{width:52px;height:52px;border-radius:14px;background:#fff;color:#2563eb;display:grid;place-items:center;font-weight:800}.brand h1{margin:0;font-size:22px}.brand p{margin:2px 0;font-size:13px;opacity:.9}.student{background:#ffffff22;padding:9px 13px;border-radius:10px;font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 30px #0f172a12;margin:24px 0;padding:28px}.login{max-width:620px;margin:55px auto}.center{text-align:center}.big{font-size:55px}.form{margin:16px 0}.form label{display:block;font-weight:700;margin-bottom:6px}.form input{width:100%;padding:13px;border:2px solid var(--line);border-radius:10px;outline:0}.form input:focus{border-color:var(--blue)}
+.btn{border:0;border-radius:10px;padding:12px 19px;font-weight:700}.primary{background:var(--blue);color:#fff}.secondary{background:#e2e8f0;color:#0f172a}.success{background:var(--green);color:#fff}.warning{background:#f59e0b;color:#fff}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{padding:16px;background:#f8fafc;border:1px solid var(--line);border-radius:13px}.stat b{font-size:25px;color:var(--blue);display:block}
+.progress{background:#fff;padding:13px 18px;border-radius:14px;box-shadow:0 5px 18px #0000000d;margin:18px 0}.pinfo{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}.bar{height:10px;background:#e2e8f0;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4);transition:.3s}
+.slide{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 30px #0f172a12}.slidehead{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;padding:15px 22px;display:flex;justify-content:space-between;gap:12px;align-items:center}.badge{background:#ffffff2b;border-radius:18px;padding:6px 10px;font-size:12px}.content{display:grid;grid-template-columns:1fr 1fr;min-height:560px}.reading{padding:24px;background:#f8fafc;border-right:1px solid var(--line)}.reading h3,.question h3{margin-top:0;color:#1d4ed8}.passage{background:#fff;border:1px solid var(--line);border-left:5px solid #2563eb;border-radius:12px;padding:19px;white-space:pre-line;max-height:600px;overflow:auto;font-size:15px}.question{padding:24px}.qtext{font-size:18px;font-weight:700;margin:17px 0}.option{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;border:2px solid var(--line);border-radius:11px;margin:9px 0;cursor:pointer;background:#fff}.option:hover{background:#eff6ff;border-color:#93c5fd}.option.sel{background:#dbeafe;border-color:#2563eb}.option input{margin-top:4px}.instruction{background:#fff7ed;border-left:5px solid #f59e0b;padding:12px;border-radius:8px;font-size:14px}.tfrow{border:1px solid var(--line);border-radius:11px;padding:13px;margin:10px 0}.tfbuttons{display:flex;gap:18px;margin-top:8px}.nav{padding:16px 22px;background:#f8fafc;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.resultcircle{width:170px;height:170px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#06b6d4);color:#fff;margin:20px auto;display:grid;place-items:center;text-align:center}.resultcircle strong{font-size:46px;display:block}.resultgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.resultbox{text-align:center;background:#f8fafc;border:1px solid var(--line);padding:15px;border-radius:12px}.resultbox b{display:block;font-size:25px;color:#2563eb}.review{border:1px solid var(--line);border-left:5px solid #2563eb;border-radius:12px;padding:18px;margin:14px 0}.review.good{background:#f0fdf4;border-left-color:#16a34a}.review.bad{background:#fef2f2;border-left-color:#dc2626}.explain{background:#eff6ff;padding:13px;border-radius:9px;margin-top:10px}.small{font-size:13px;color:var(--muted)}footer{text-align:center;color:var(--muted);padding:28px 10px}
+@media(max-width:820px){.head{flex-direction:column;align-items:flex-start}.grid3{grid-template-columns:1fr}.content{display:block}.reading{border-right:0;border-bottom:1px solid var(--line);padding:18px}.question{padding:18px}.passage{max-height:390px;font-size:14px}.resultgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.brand h1{font-size:18px}.card{padding:19px}.slidehead{padding:13px 15px}.qtext{font-size:16px}.nav{padding:13px 15px}.nav .btn{flex:1}.resultgrid{grid-template-columns:1fr 1fr}}
+@media print{header,.no-print,footer{display:none!important}body{background:#fff}.card,.slide{box-shadow:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap head">
+<div class="brand"><div class="logo">TKA</div><div><h1>TKA English Trainer</h1><p>Latihan Pendalaman TKA Bahasa Inggris SMA</p></div></div>
+<div id="studentBadge" class="student hidden"></div>
+</div>
+</header>
+
+<section id="login">
+<div class="wrap">
+<div class="card login">
+<div class="center"><div class="big"></div><h2 style="color:#2563eb">TKA English  Trainer</h2><p>Latihan membaca, menjawab, dan memahami pembahasan soal TKA Bahasa Inggris.</p></div>
+<div class="form"><label>Nama Lengkap</label><input id="name" placeholder="Contoh: Eka Wahyu SAputra"></div>
+<div class="form"><label>Kelas</label><input id="kelas" placeholder="Contoh: XI IPA 1"></div>
+<div class="form"><label>Email</label><input id="email" type="email" placeholder="nama@email.com"></div>
+<button class="btn primary" style="width:100%" onclick="login()">🚀 Masuk dan Mulai</button>
+<p class="small center">Junjunglah kejujuran setinggi mungkin.</p>
+</div>
+</div>
+</section>
+
+<section id="intro" class="hidden">
+<div class="wrap"><div class="card">
+<h2>📋 Petunjuk Pengerjaan</h2>
+<div class="grid3">
+<div class="stat"><b>25</b>Soal</div><div class="stat"><b>A2–B1</b>Kompleksitas teks</div><div class="stat"><b>3</b>Level kompetensi</div>
+</div>
+<ul>
+<li>Setiap slide memuat <b>teks, pertanyaan, dan pilihan jawaban</b> dalam satu tampilan.</li>
+<li>Pilihan ganda memiliki 5 pilihan dan hanya 1 jawaban benar.</li>
+<li>Pilihan ganda kompleks memiliki 5 pilihan dan dapat memiliki lebih dari satu jawaban benar.</li>
+<li>Benar–Salah terdiri atas 3 pernyataan.</li>
+<li>Bacalah teks terlebih dahulu, lalu gunakan bukti dari teks untuk menentukan jawaban.</li>
+</ul>
+<div class="instruction"><b>Strategi TKA:</b> bedakan informasi tersurat, kesimpulan tersirat, serta penilaian terhadap tujuan, argumen, dan bahasa penulis.</div>
+<br><button class="btn primary" onclick="begin()">Mulai Mengerjakan →</button>
+</div></div>
+</section>
+
+<section id="test" class="hidden">
+<div class="wrap">
+<div class="progress"><div class="pinfo"><span id="prog"></span><span id="answered"></span></div><div class="bar"><div id="fill" class="fill"></div></div></div>
+<div id="slide"></div>
+</div>
+</section>
+
+<section id="result" class="hidden">
+<div class="wrap"><div class="card">
+<div class="center"><h2>🎉 Hasil Latihan</h2><p id="resultStudent"></p>
+<div class="resultcircle"><div><strong id="score">0</strong><span>Nilai</span></div></div></div>
+<div class="resultgrid">
+<div class="resultbox"><b id="correct">0</b>Benar</div>
+<div class="resultbox"><b id="wrong">0</b>Salah/Belum</div>
+<div class="resultbox"><b id="textual">0</b>Tekstual</div>
+<div class="resultbox"><b id="inferential">0</b>Inferensial</div>
+<div class="resultbox"><b id="evaluation">0</b>Evaluasi</div>
+</div>
+<div class="card" style="background:#f8fafc"><h3>Interpretasi</h3><p id="message"></p></div>
+<div class="no-print" style="display:flex;flex-wrap:wrap;gap:10px">
+<button class="btn primary" onclick="review()">📖 Lihat Pembahasan</button>
+<button class="btn success" onclick="downloadResult()">⬇️ Unduh Hasil</button>
+<button class="btn warning" onclick="sendEmail()">📧 Kirim melalui Email</button>
+<button class="btn secondary" onclick="window.print()">🖨️ Cetak / PDF</button>
+</div>
+</div></div>
+</section>
+
+<section id="review" class="hidden">
+<div class="wrap"><div class="card"><h2>📖 Pembahasan Soal</h2><div id="reviewList"></div><button class="btn primary no-print" onclick="backResult()">← Kembali ke Hasil</button></div></div>
+</section>
+
+<footer>TKA English Reading Trainer • Media Pembelajaran Bahasa Inggris SMA</footer>
+
+<script>
+const passages={
+D:`Yogyakarta is one of Indonesia’s best-known cultural destinations. The city combines traditional Javanese culture with modern education, tourism, and daily life. Visitors can find historical places, traditional food, local arts, and many public spaces for learning and recreation.
+
+One important place is the Sultan’s Palace, or Keraton Yogyakarta. It is a cultural center where visitors can learn about Javanese traditions and history. Traditional performances and cultural activities are sometimes held there. Another popular area is Malioboro Street, where people can walk, shop, eat local food, and buy souvenirs.
+
+Yogyakarta is also known for its traditional food. Gudeg, made mainly from young jackfruit, is one of the city’s most famous dishes. Other local foods can be found in markets, small restaurants, and food stalls.
+
+The city is also home to many schools and universities. Because of this, students from different parts of Indonesia live and study there. The combination of culture, education, and tourism gives Yogyakarta a special character.
+
+Although the city continues to develop, many local traditions remain important. This balance between old and new makes Yogyakarta an interesting place for visitors and students who want to learn about Indonesian culture.`,
+
+R:`Last Saturday, my English class visited a batik workshop in Bantul, Yogyakarta. The visit was part of a school project about Indonesian traditional culture. We left school at seven in the morning and arrived about forty minutes later.
+
+A local craftsperson welcomed us and explained the basic process of making batik. First, we learned how to prepare the cloth. Then, we watched the craftsperson use a canting to apply hot wax to the fabric. The wax created lines that would later become part of the design.
+
+After the demonstration, we were allowed to make a simple batik pattern. At first, I felt nervous because the process looked difficult. The craftsperson patiently guided us and showed us how to hold the tool. My first lines were not perfect, but I became more confident after several attempts.
+
+Before we went home, our teacher asked us to discuss what we had learned. We agreed that traditional crafts require patience, creativity, careful work, and practice. We also realized that cultural traditions can be understood better when people experience them directly.
+
+The visit was enjoyable, but its greatest value was educational. It helped us appreciate local culture and understand why traditional skills should be respected and preserved.`,
+
+N:`One morning, a deer came to a small river to drink. He noticed a crocodile waiting near the riverbank. The deer knew that the crocodile wanted to catch him, so he decided to use his intelligence instead of physical strength.
+
+The deer walked along the river and called loudly. He said that he needed to count the animals in the forest because the animals were preparing a special event. The crocodile became curious and asked for more information.
+
+The deer explained that he also needed to count the crocodiles in the river. The crocodile believed the story and called several other crocodiles. The deer asked them to line up across the river so that he could count them.
+
+The deer then carefully jumped from one crocodile to another while pretending to count. When he reached the other side, he quickly ran into the forest. The crocodiles realized that they had been tricked, but the deer was already safe.
+
+The story suggests that intelligence can help someone solve a difficult problem. It also reminds readers that information should be considered carefully before it is believed. A person who accepts every claim without checking may make a poor decision.`,
+
+P:`Preparing a simple fruit salad is an easy activity that can be done at home or at school. It does not require complicated equipment. You need several fresh fruits, a clean bowl, a knife, and a spoon.
+
+First, wash the fruits carefully under clean water. You can use apples, bananas, papayas, mangoes, or other fresh fruits. Next, peel the fruits that need to be peeled. Cut the fruits into small pieces of a similar size.
+
+After that, put the fruit pieces into a clean bowl. Add a small amount of yogurt or another dressing according to your preference. Mix the fruits gently so they do not become too soft.
+
+Finally, place the fruit salad in a serving bowl. If you want it to be cool, keep it in the refrigerator for a short time before serving.
+
+Cleanliness is important when preparing food. Wash your hands before handling the ingredients and make sure that the equipment is clean. Fresh ingredients and careful preparation will make the fruit salad safer and more enjoyable.
+
+The procedure is simple, but following the sequence carefully helps produce a good result.`,
+
+A:`School gardens can provide more benefits than simply making a school look attractive. They can become useful learning spaces where students observe plants, work together, and learn about responsibility. For these reasons, schools should consider developing and maintaining small gardens.
+
+First, gardens can support learning activities. Students can observe how plants grow and record changes over time. These activities can make lessons about nature more concrete. Students may also become more aware of their surroundings.
+
+Second, school gardens can encourage cooperation. Maintaining a garden often requires students to share tasks such as watering plants, removing unwanted plants, and keeping the area clean. Working together gives students opportunities to practice responsibility and communication.
+
+Finally, gardens can improve the school environment. Plants can create a more pleasant space for students and teachers. A small garden does not have to be expensive. Schools can use simple containers, recycled materials, and local plants.
+
+Therefore, school gardens deserve attention as part of a positive learning environment. They can support education, cooperation, and care for the environment at the same time.`
+};
+
+const questions=[
+{n:1,t:"mc",c:"Pemahaman Tekstual",p:"D",q:"Which statement is explicitly mentioned in the text?",o:["Yogyakarta is known only for modern buildings.","Malioboro is a place where visitors can shop and buy souvenirs.","The Sultan’s Palace is used only as a university.","Gudeg is mainly made from potatoes.","Students cannot live and study in Yogyakarta."],a:1,e:"The second paragraph explicitly states that people can walk, shop, eat local food, and buy souvenirs in Malioboro."},
+{n:2,t:"mc",c:"Pemahaman Inferensial",p:"D",q:"The text suggests that Yogyakarta is attractive to students mainly because it ...",o:["has no traditional culture","combines education with culture and daily life","is far from other Indonesian cities","has only tourist attractions","does not have local food"],a:1,e:"The text mentions many schools and universities and also describes the city’s cultural and tourism resources."},
+{n:3,t:"complex",c:"Evaluasi dan Apresiasi",p:"D",q:"Which TWO statements are supported by the writer’s description of Yogyakarta?",o:["The city offers opportunities to learn about culture.","Traditional culture remains important despite development.","All visitors must stay near the palace.","Modern life has completely replaced tradition.","The city has no educational role."],a:[0,1],e:"Both statements are supported by the final paragraphs, which describe the balance between development, education, and local traditions."},
+{n:4,t:"tf",c:"Pemahaman Tekstual",p:"D",q:"Determine whether each statement is TRUE or FALSE.",s:["The Sultan’s Palace is mentioned as a cultural center.","Gudeg is described as a traditional dish of Yogyakarta.","The text says that local traditions are no longer important."],a:[true,true,false],e:"The first two statements are directly supported. The last is false because the text says many traditions remain important."},
+{n:5,t:"mc",c:"Evaluasi dan Apresiasi",p:"D",q:"The writer’s overall attitude toward Yogyakarta is best described as ...",o:["positive and appreciative","angry and doubtful","negative and disappointed","uninterested and distant","critical of local traditions"],a:0,e:"The writer highlights cultural, educational, and tourism benefits and ends with a positive description of the city."},
+
+{n:6,t:"mc",c:"Pemahaman Tekstual",p:"R",q:"What was the purpose of the students’ visit to the batik workshop?",o:["To buy expensive clothes","To complete a school project about traditional culture","To learn how to open a restaurant","To interview tourists","To organize a competition"],a:1,e:"The first paragraph explicitly says the visit was part of a school project about Indonesian traditional culture."},
+{n:7,t:"mc",c:"Pemahaman Tekstual",p:"R",q:"What did the students do after watching the demonstration?",o:["They immediately returned to school.","They made a simple batik pattern.","They sold batik products.","They interviewed tourists.","They changed the workshop schedule."],a:1,e:"The third paragraph states that the students were allowed to make a simple batik pattern after the demonstration."},
+{n:8,t:"complex",c:"Pemahaman Inferensial",p:"R",q:"Which TWO conclusions can reasonably be drawn from the recount?",o:["Practice helped the writer become more confident.","The craftsperson played an important guiding role.","The writer already had advanced batik skills.","The students disliked learning about culture.","The teacher prevented students from practicing."],a:[0,1],e:"The writer became more confident after several attempts, while the craftsperson patiently guided the students."},
+{n:9,t:"tf",c:"Pemahaman Tekstual",p:"R",q:"Determine whether each statement is TRUE or FALSE.",s:["The class visited a batik workshop in Bantul.","The class arrived in the afternoon.","The visit helped students appreciate local culture."],a:[true,false,true],e:"The class left at seven in the morning and arrived about forty minutes later. The final paragraph says the visit helped them appreciate local culture."},
+{n:10,t:"mc",c:"Evaluasi dan Apresiasi",p:"R",q:"Which value is most strongly emphasized by the experience?",o:["Patience and appreciation of cultural traditions","Competition and winning","The importance of expensive tools","Avoiding traditional activities","Replacing traditional crafts with machines"],a:0,e:"The students conclude that traditional crafts require patience, creativity, careful work, and practice, and they learn to appreciate local culture."},
+
+{n:11,t:"mc",c:"Pemahaman Tekstual",p:"N",q:"Why did the deer ask the crocodiles to line up?",o:["To help him cross the river","To invite them to a forest party","To teach them to swim","To give them food","To make them leave the river"],a:0,e:"The deer used the crocodiles as stepping stones to cross the river safely."},
+{n:12,t:"mc",c:"Pemahaman Inferensial",p:"N",q:"The crocodiles believed the deer because the deer’s explanation ...",o:["was supported by a teacher","sounded believable to them","was checked by every animal","came from a famous hunter","was written in a book"],a:1,e:"The crocodiles became curious and accepted the deer’s explanation without checking it."},
+{n:13,t:"complex",c:"Evaluasi dan Apresiasi",p:"N",q:"Which TWO lessons are supported by the narrative?",o:["Intelligence can help solve difficult problems.","Information should be checked before being believed.","Every stranger should always be trusted.","Physical strength is always superior to intelligence.","Deception is always the best solution."],a:[0,1],e:"The final paragraph directly connects the story to intelligence and the need to consider information carefully."},
+{n:14,t:"tf",c:"Pemahaman Tekstual",p:"N",q:"Determine whether each statement is TRUE or FALSE.",s:["The deer wanted to cross the river safely.","The crocodiles understood the trick immediately.","The deer reached the forest after crossing the river."],a:[true,false,true],e:"The deer used the crocodiles to cross safely. They realized the trick only after he had reached the other side."},
+{n:15,t:"mc",c:"Evaluasi dan Apresiasi",p:"N",q:"Why is the final paragraph important to the narrative?",o:["It gives a lesson that connects the story to readers’ lives.","It introduces a new setting unrelated to the story.","It changes the narrative into a procedure.","It explains the crocodiles’ family history.","It focuses only on the river’s physical features."],a:0,e:"The final paragraph gives the moral lesson and encourages readers to think carefully about information."},
+
+{n:16,t:"mc",c:"Pemahaman Tekstual",p:"P",q:"Which action should be done first?",o:["Add yogurt","Put the fruit into a serving bowl","Wash the fruits","Place the salad in the refrigerator","Mix the fruits"],a:2,e:"The procedure begins by washing the fruits carefully under clean water."},
+{n:17,t:"mc",c:"Pemahaman Inferensial",p:"P",q:"Why does the writer recommend cutting the fruits into similar-sized pieces?",o:["They will be easier to mix and serve evenly.","They will become sweeter automatically.","They will no longer need to be washed.","They will grow after being cut.","They will make the bowl heavier."],a:0,e:"Similar-sized pieces make the mixture easier to handle and serve evenly; this is a reasonable inference from the preparation sequence."},
+{n:18,t:"complex",c:"Pemahaman Tekstual",p:"P",q:"Which TWO items are mentioned as equipment?",o:["A clean bowl","A spoon","A frying pan","An electric oven","A blender"],a:[0,1],e:"The first paragraph mentions a clean bowl, knife, and spoon. A bowl and spoon are therefore correct."},
+{n:19,t:"tf",c:"Pemahaman Tekstual",p:"P",q:"Determine whether each statement is TRUE or FALSE.",s:["Yogurt may be added according to personal preference.","The fruit salad must be cooked before serving.","Clean equipment is important."],a:[true,false,true],e:"The text says yogurt can be added according to preference and emphasizes clean equipment. It gives no cooking step."},
+{n:20,t:"mc",c:"Evaluasi dan Apresiasi",p:"P",q:"Which feature makes this text effective as a procedure?",o:["The actions are presented in a logical sequence.","It focuses on unrelated historical events.","It avoids action verbs.","It gives only personal opinions.","It presents several conflicting instructions."],a:0,e:"The text uses a clear sequence: first, next, after that, and finally."},
+
+{n:21,t:"mc",c:"Pemahaman Tekstual",p:"A",q:"What is the writer’s main argument?",o:["Schools should consider developing school gardens.","Schools should replace classrooms with gardens.","Gardens are always expensive.","Only science teachers should maintain gardens.","Students should stop studying nature."],a:0,e:"The thesis states that schools should consider developing and maintaining small gardens."},
+{n:22,t:"mc",c:"Pemahaman Inferensial",p:"A",q:"The writer implies that gardens support learning because students can ...",o:["observe changes in living things directly","avoid teachers during lessons","replace every classroom activity","memorize plant names without practice","work without communicating"],a:0,e:"Students can observe plant growth and record changes, making learning about nature more concrete."},
+{n:23,t:"complex",c:"Evaluasi dan Apresiasi",p:"A",q:"Which TWO arguments support the writer’s position?",o:["Gardens can support learning activities.","Gardens can encourage cooperation.","Gardens must use expensive equipment.","Gardens should replace all school facilities.","Gardens prevent communication."],a:[0,1],e:"The writer gives learning and cooperation as two clear supporting arguments before discussing environmental benefits."},
+{n:24,t:"tf",c:"Pemahaman Tekstual",p:"A",q:"Determine whether each statement is TRUE or FALSE.",s:["School gardens can support care for the environment.","The writer says gardens always require large amounts of money.","The conclusion repeats the positive value of school gardens."],a:[true,false,true],e:"The text says gardens can encourage environmental care and can be created with simple, recycled, or local materials."},
+{n:25,t:"mc",c:"Evaluasi dan Apresiasi",p:"A",q:"Which statement best evaluates the writer’s argument?",o:["It is supported by several practical and relevant reasons.","It gives no evidence or explanation.","It depends only on emotional language.","It discusses a topic unrelated to schools.","Its conclusion contradicts its thesis."],a:0,e:"The writer supports the position with three relevant reasons: learning, cooperation, and a better school environment."}
+];
+
+let idx=0, answers=Array(questions.length).fill(null), student={}, result=null;
+
+function esc(x){return String(x??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function typeName(t){return t==="mc"?"Pilihan Ganda":t==="complex"?"Pilihan Ganda Kompleks":"Benar–Salah"}
+function login(){
+ const name=document.getElementById("name").value.trim(), kelas=document.getElementById("kelas").value.trim(), email=document.getElementById("email").value.trim();
+ if(!name||!kelas||!email)return alert("Lengkapi nama, kelas, dan email terlebih dahulu.");
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return alert("Masukkan alamat email yang benar.");
+ student={name,kelas,email};
+ document.getElementById("studentBadge").textContent=`👤 ${name} • ${kelas}`;
+ document.getElementById("studentBadge").classList.remove("hidden");
+ document.getElementById("login").classList.add("hidden"); document.getElementById("intro").classList.remove("hidden");
+}
+function begin(){document.getElementById("intro").classList.add("hidden");document.getElementById("test").classList.remove("hidden");render()}
+function render(){
+ const q=questions[idx], passage=passages[q.p];
+ let answer="";
+ if(q.t==="mc") answer=q.o.map((x,i)=>`<label class="option" onclick="chooseVisual(this)"><input type="radio" name="ans" value="${i}" onchange="saveMC(${i})"><span><b>${String.fromCharCode(65+i)}.</b> ${esc(x)}</span></label>`).join("");
+ if(q.t==="complex") answer=`<div class="instruction"><b>Petunjuk:</b> pilih semua pilihan yang benar.</div>`+q.o.map((x,i)=>`<label class="option" onclick="chooseVisual(this)"><input type="checkbox" value="${i}" onchange="saveComplex()"><span><b>${String.fromCharCode(65+i)}.</b> ${esc(x)}</span></label>`).join("");
+ if(q.t==="tf") answer=`<div class="instruction"><b>Petunjuk:</b> tentukan Benar atau Salah untuk setiap pernyataan.</div>`+q.s.map((x,i)=>`<div class="tfrow"><b>${i+1}.</b> ${esc(x)}<div class="tfbuttons"><label><input type="radio" name="tf${i}" value="true" onchange="saveTF()"> Benar</label><label><input type="radio" name="tf${i}" value="false" onchange="saveTF()"> Salah</label></div></div>`).join("");
+ document.getElementById("slide").innerHTML=`<div class="slide"><div class="slidehead"><b>Soal ${q.n} dari 25</b><span class="badge">${typeName(q.t)} • ${q.c}</span></div><div class="content"><div class="reading"><h3>📖 Teks</h3><div class="passage">${esc(passage)}</div></div><div class="question"><h3>📝 Pertanyaan</h3><div class="qtext">${esc(q.q)}</div>${answer}</div></div><div class="nav no-print"><button class="btn secondary" onclick="prev()" ${idx===0?"disabled":""}>← Sebelumnya</button><button class="btn ${idx===questions.length-1?"success":"primary"}" onclick="${idx===questions.length-1?"finish()":"next()"}">${idx===questions.length-1?"✅ Selesai":"Berikutnya →"}</button></div></div>`;
+ restore(q); update();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function chooseVisual(el){if(el.querySelector("input").type==="radio")document.querySelectorAll(".option").forEach(x=>x.classList.remove("sel"));el.classList.toggle("sel")}
+function saveMC(v){answers[idx]=v;update()}
+function saveComplex(){answers[idx]=[...document.querySelectorAll('#slide input[type="checkbox"]:checked')].map(x=>+x.value);update()}
+function saveTF(){answers[idx]=[0,1,2].map(i=>{let x=document.querySelector(`input[name="tf${i}"]:checked`);return x?x.value==="true":null});update()}
+function saveCurrent(){let q=questions[idx];if(q.t==="mc"){let x=document.querySelector('input[name="ans"]:checked');if(x)answers[idx]=+x.value}else if(q.t==="complex")saveComplex();else saveTF()}
+function restore(q){let a=answers[idx];if(a==null)return;if(q.t==="mc"){let x=document.querySelector(`input[name="ans"][value="${a}"]`);if(x){x.checked=true;x.parentElement.classList.add("sel")}}else if(q.t==="complex"){a.forEach(v=>{let x=document.querySelector(`#slide input[type="checkbox"][value="${v}"]`);if(x){x.checked=true;x.parentElement.classList.add("sel")}})}else{a.forEach((v,i)=>{if(v==null)return;let x=document.querySelector(`input[name="tf${i}"][value="${v}"]`);if(x)x.checked=true})}}
+function update(){let n=answers.filter(a=>a!==null&&(!Array.isArray(a)||a.length===0?false:a.every(v=>v!==null))).length;document.getElementById("prog").textContent=`Soal ${idx+1} dari 25`;document.getElementById("answered").textContent=`${n}/25 terjawab`;document.getElementById("fill").style.width=((idx+1)/25*100)+"%"}
+function next(){saveCurrent();if(idx<24){idx++;render()}}
+function prev(){saveCurrent();if(idx>0){idx--;render()}}
+function equalArr(a,b){return Array.isArray(a)&&Array.isArray(b)&&JSON.stringify([...a].sort())===JSON.stringify([...b].sort())}
+function correct(q,a){if(q.t==="mc")return a===q.a;if(q.t==="complex")return equalArr(a,q.a);return Array.isArray(a)&&JSON.stringify(a)===JSON.stringify(q.a)}
+function finish(){saveCurrent();let left=answers.filter(a=>a===null||Array.isArray(a)&&a.some(v=>v===null)).length;if(left&&!confirm(`Masih ada ${left} soal yang belum lengkap. Akhiri latihan?`))return;let c=0,tx=0,infr=0,ev=0;questions.forEach((q,i)=>{if(correct(q,answers[i])){c++;if(q.c==="Pemahaman Tekstual")tx++;else if(q.c==="Pemahaman Inferensial")infr++;else ev++}});result={c,w:25-c,score:Math.round(c/25*100),tx,infr,ev};localStorage.setItem("tkaEnglishResult",JSON.stringify({student,result,answers,date:new Date().toISOString()}));showResult()}
+function showResult(){["test","review"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById("result").classList.remove("hidden");document.getElementById("score").textContent=result.score;document.getElementById("correct").textContent=result.c;document.getElementById("wrong").textContent=result.w;document.getElementById("textual").textContent=result.tx;document.getElementById("inferential").textContent=result.infr;document.getElementById("evaluation").textContent=result.ev;document.getElementById("resultStudent").innerHTML=`<b>${esc(student.name)}</b> • Kelas ${esc(student.kelas)}`;document.getElementById("message").textContent=result.score>=85?"Sangat baik. Pertahankan kemampuan membaca informasi tersurat dan terus latih inferensi serta evaluasi teks.":result.score>=70?"Baik. Tingkatkan ketelitian pada informasi tersirat, tujuan penulis, dan evaluasi argumen.":result.score>=55?"Cukup. Latih menemukan gagasan utama, hubungan antargagasan, dan kesimpulan dari teks A2–B1.":"Perlu latihan lebih lanjut. Mulai dari teks A2 dan biasakan menemukan bukti jawaban sebelum memilih opsi.";window.scrollTo({top:0,behavior:"smooth"})}
+function review(){document.getElementById("result").classList.add("hidden");document.getElementById("review").classList.remove("hidden");let out="";questions.forEach((q,i)=>{let ok=correct(q,answers[i]),mine=answerText(q,answers[i]),key=answerText(q,q.a);out+=`<div class="review ${ok?"good":"bad"}"><b>Soal ${q.n} • ${q.c}</b><p>${esc(q.q)}</p><p><b>Jawaban Anda:</b><br>${mine}</p><p><b>Jawaban benar:</b><br>${key}</p><div class="explain"><b>💡 Pembahasan:</b> ${esc(q.e)}</div></div>`});document.getElementById("reviewList").innerHTML=out;window.scrollTo({top:0,behavior:"smooth"})}
+function answerText(q,a){if(a==null)return '<span style="color:#dc2626">Belum dijawab</span>';if(q.t==="mc")return `${String.fromCharCode(65+a)}. ${esc(q.o[a])}`;if(q.t==="complex")return a.map(v=>`${String.fromCharCode(65+v)}. ${esc(q.o[v])}`).join("<br>");return a.map((v,i)=>`${i+1}. ${v?"Benar":"Salah"}`).join("<br>")}
+function backResult(){document.getElementById("review").classList.add("hidden");document.getElementById("result").classList.remove("hidden")}
+function downloadResult(){let s=`TKA ENGLISH READING TRAINER\nHASIL LATIHAN\n\nNama: ${student.name}\nKelas: ${student.kelas}\nEmail: ${student.email}\nTanggal: ${new Date().toLocaleString("id-ID")}\n\nNilai: ${result.score}\nBenar: ${result.c}\nSalah/Belum: ${result.w}\nPemahaman Tekstual: ${result.tx}\nPemahaman Inferensial: ${result.infr}\nEvaluasi & Apresiasi: ${result.ev}\n\nHASIL PER SOAL\n`;questions.forEach((q,i)=>s+=`Soal ${q.n}: ${correct(q,answers[i])?"BENAR":"SALAH/BELUM"}\n`);let blob=new Blob([s],{type:"text/plain;charset=utf-8"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=`Hasil_TKA_${student.name.replace(/\s+/g,"_")}.txt`;a.click();URL.revokeObjectURL(u)}
+function sendEmail(){let subject=`Hasil Latihan TKA Bahasa Inggris - ${student.name}`,body=`HASIL LATIHAN TKA BAHASA INGGRIS\n\nNama: ${student.name}\nKelas: ${student.kelas}\nEmail: ${student.email}\nNilai: ${result.score}\nBenar: ${result.c}\nSalah/Belum: ${result.w}\nPemahaman Tekstual: ${result.tx}\nPemahaman Inferensial: ${result.infr}\nEvaluasi dan Apresiasi: ${result.ev}\nTanggal: ${new Date().toLocaleString("id-ID")}`;location.href=`mailto:${encodeURIComponent(student.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
+</script>
+</body>
+</html>
